@@ -11,10 +11,12 @@ navigator.mediaDevices.getUserMedia({ video: true }).then(stream => {
     vid.srcObject = stream;
 });
 
+var rafId = null;
 function sizeCheck() {
-    requestAnimationFrame(sizeCheck);
+    rafId = requestAnimationFrame(sizeCheck);
     if (vid.videoWidth) {
         console.log(vid.videoWidth + ' x ' + vid.videoHeight);
+        cancelAnimationFrame(rafId);
     }
 }
 sizeCheck();
